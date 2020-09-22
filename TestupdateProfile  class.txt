@@ -1,0 +1,30 @@
+@isTest
+private class TestupdateProfile {
+    static testMethod void upprofile(){
+List<Contact> lac =new List<Contact>([SELECT Id,FirstName,LastName,AccountId FROM Contact]);
+       Map<Id,Account> mapAccount = new Map<Id,Account>([SELECT Id,website FROM Account]);
+       Contact con=new Contact();
+        con.AccountId=con.Id;
+        con.FirstName='ahmed';
+        con.LastName='iyaz';
+            insert con;
+            Account acc=new Account();
+            acc.Name = 'Test';
+            acc.BillingStreet = '123 Some St.';
+            acc.BillingCity = 'Somewhere';
+            acc.BillingState = 'CT';
+            acc.BillingPostalCode = '12345';
+            acc.Website='www.google.com';
+        insert acc;
+          for(Contact obj :lac)
+   {
+   Account objAccount = mapAccount.get(obj.AccountId);
+    if(obj.FirstName != NULL){
+String strFirstName=obj.FirstName.substring(0,1);
+obj.Profile__c =objAccount.Website + '/' +strFirstName + obj.LastName;
+}
+              }
+
+}
+}
+
